@@ -1,10 +1,10 @@
 import React from 'react';
-import Tasks from '../../tasks/components/tasks-layout';
+import './home.sass';
 
 function HomeLayout(props) {
   return(
-    <section id="homeContainer">
-      <Tasks name={props.name} />
+    <section className="HomeLayout">
+      {props.children}
     </section>
   )
 }

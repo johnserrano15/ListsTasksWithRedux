@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Tasks (props) {
+function TasksLayout (props) {
   return(
-    <section id="listTasks">
-      <h3>Hola mundo props.name</h3>
-    </section>
+    <div id="listTasks">
+      {props.children}
+    </div>
   )
 }
 
-export default Tasks;
+export default TasksLayout;
