@@ -36,14 +36,16 @@ class Tasks extends Component {
   }
 
   handleDeleteTask = (id) => {
-    console.log(id)
+    // console.log(id)
     const items = this.state.items;
     // console.info(items);
-    items.splice(id, 1);
+    // Limpiando array sin mutar el array siendo -> inmutable 
+    const newItems = items.filter( e => e.id !== id);
+    // console.log(newItems)
 
     this.setState({
-      items: items
-    })
+      items: newItems
+    });
   }
 
   render() {

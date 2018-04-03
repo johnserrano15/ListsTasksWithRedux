@@ -7,7 +7,7 @@ function ListTasks(props) {
       <li>Task one.</li>
       {/* {console.log(props.items)} */}
       {props.items.map((item, index) => (
-        <li key={item.id}>{item.text} <DeleteTask handleDeleteTask={props.handleDeleteTask} id={index} />  </li>
+        <li key={item.id}>{item.text} <DeleteTask handleDeleteTask={props.handleDeleteTask} id={item.id} />  </li>
       ))}
     </ul>
   )
