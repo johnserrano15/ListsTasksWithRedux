@@ -12,7 +12,7 @@ class Tasks extends Component {
     }
   }
 
-  handleSubmit = (event) => {
+  handleAddtask = (event) => {
     event.preventDefault();
     // console.log(this.input.value, 'submit');
     if (!this.input.value.length) {
@@ -35,16 +35,27 @@ class Tasks extends Component {
     this.input = element;
   }
 
+  handleDeleteTask = (id) => {
+    console.log(id)
+    const items = this.state.items;
+    // console.info(items);
+    items.splice(id, 1);
+
+    this.setState({
+      items: items
+    })
+  }
+
   render() {
     return (
       <TasksLayout>
         <AddTask
           setRef={this.setInputref}
-          handleSubmit={this.handleSubmit}
+          handleAddtask={this.handleAddtask}
         />
         <h3>Hola mundo {this.props.name}</h3>
         <p>Agregar la siguiente task {this.state.items.length + 2}</p>
-        <ListTasks items={this.state.items} />
+        <ListTasks items={this.state.items} handleDeleteTask={this.handleDeleteTask}/>
       </TasksLayout>
     )
   }

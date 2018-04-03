@@ -3,7 +3,7 @@ import React from 'react';
 const Task = (props) => (
   <form
     className="Task"
-    onSubmit={props.handleSubmit}
+    onSubmit={props.handleAddtask}
   >
     <input
       ref={props.setRef}
