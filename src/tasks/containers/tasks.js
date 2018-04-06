@@ -72,6 +72,29 @@ class Tasks extends Component {
     })
   }
 
+  handleSubmitUpdate = (event) => {
+    event.preventDefault();
+    // console.log(event.target.idTask.value)
+    const items = this.state.items;
+    const id = event.target.idTask.value;
+
+    const newItems = items.map(e => {
+      // console.log(e)
+      console.info(id)
+      if(e.id == id) {
+        e.text = this.inputUpdate.value
+      }
+      return e
+    });
+
+    console.log(newItems)
+
+    this.setState({
+      items: newItems,
+      shouldHide: ''
+    });
+  }
+
   render() {
     return (
       <TasksLayout>
@@ -89,6 +112,7 @@ class Tasks extends Component {
           setRef={this.setInputUpdateRef}
           value={this.state.value}
           shouldHide={this.state.shouldHide}
+          handleSubmitUpdate={this.handleSubmitUpdate}
         />
       </TasksLayout>
     )
