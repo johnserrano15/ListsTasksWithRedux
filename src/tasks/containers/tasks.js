@@ -9,6 +9,8 @@ class Tasks extends Component {
     this.state = {
       modalVisible: false,
       items: [],
+      value: '',
+      shouldHide: '',
     }
   }
 
@@ -26,6 +28,7 @@ class Tasks extends Component {
 
     this.setState(prevState => ({
       items: prevState.items.concat(newItem),
+      shouldHide: '',
     }));
 
     this.input.value = '';
@@ -48,6 +51,27 @@ class Tasks extends Component {
     });
   }
 
+  handleUpdateTask = (id, text) => {
+    console.log('Hola update', id)
+    // console.info(this.inputUpdate.value)
+    this.setState({
+      shouldHide: id,
+      value: text,
+    });
+  }
+
+  setInputUpdateRef = (element) => {
+    this.inputUpdate = element;
+  }
+
+  handleChange = (event) => {
+    console.log('modificando');
+    this.setState({
+      // value: event.target.value,
+      value: this.inputUpdate.value,
+    })
+  }
+
   render() {
     return (
       <TasksLayout>
@@ -57,7 +81,15 @@ class Tasks extends Component {
         />
         <h3>Hola mundo {this.props.name}</h3>
         <p>Agregar la siguiente task {this.state.items.length + 2}</p>
-        <ListTasks items={this.state.items} handleDeleteTask={this.handleDeleteTask}/>
+        <ListTasks 
+          items={this.state.items} 
+          handleUpdateTask={this.handleUpdateTask} 
+          handleDeleteTask={this.handleDeleteTask}
+          handleChange={this.handleChange}
+          setRef={this.setInputUpdateRef}
+          value={this.state.value}
+          shouldHide={this.state.shouldHide}
+        />
       </TasksLayout>
     )
   }
