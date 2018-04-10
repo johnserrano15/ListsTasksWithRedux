@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Task = (props) => (
   <form
@@ -14,5 +15,10 @@ const Task = (props) => (
     <button id="aggTask">Agg Task</button>
   </form>
 )
+
+Task.propTypes = {
+  handleAddtask: PropTypes.func,
+  setRef: PropTypes.func,
+}
 
 export default Task;

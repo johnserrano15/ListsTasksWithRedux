@@ -10,7 +10,7 @@ class Tasks extends Component {
       modalVisible: false,
       items: [],
       value: '',
-      shouldHide: '',
+      shouldHide: 0,
     }
   }
 
@@ -28,7 +28,7 @@ class Tasks extends Component {
 
     this.setState(prevState => ({
       items: prevState.items.concat(newItem),
-      shouldHide: '',
+      shouldHide: 0,
     }));
 
     this.input.value = '';
@@ -52,7 +52,7 @@ class Tasks extends Component {
   }
 
   handleUpdateTask = (id, text) => {
-    console.log('Hola update', id)
+    // console.log('Hola update', id)
     // console.info(this.inputUpdate.value)
     this.setState({
       shouldHide: id,
@@ -65,7 +65,7 @@ class Tasks extends Component {
   }
 
   handleChange = (event) => {
-    console.log('modificando');
+    // console.log('modificando');
     this.setState({
       // value: event.target.value,
       value: this.inputUpdate.value,
@@ -80,18 +80,18 @@ class Tasks extends Component {
 
     const newItems = items.map(e => {
       // console.log(e)
-      console.info(id)
+      // console.info(id)
       if(e.id == id) {
         e.text = this.inputUpdate.value
       }
-      return e
+      return e;
     });
 
-    console.log(newItems)
+    // console.log(newItems)
 
     this.setState({
       items: newItems,
-      shouldHide: ''
+      shouldHide: 0
     });
   }
 
