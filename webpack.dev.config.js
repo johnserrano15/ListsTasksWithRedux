@@ -9,7 +9,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 */
 module.exports = {
   entry: {
-    home: path.resolve(__dirname, 'src/entries/home.js'),
+    home: ['babel-polyfill', path.resolve(__dirname, 'src/entries/home.js')],
     // redux: path.resolve(__dirname, 'src/entries/redux.js'),
   },
   output: {
@@ -29,7 +29,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'react', 'stage-2']
+            presets: ['es2015', 'react', 'stage-2'],
           }
         }
       },
