@@ -15,7 +15,7 @@ module.exports = (env) => {
 
   return {
     entry: {
-      home: path.resolve(__dirname, 'src/entries/home.js'),
+      home: ['babel-polyfill', path.resolve(__dirname, 'src/entries/home.js')],
       // redux: path.resolve(__dirname, 'src/entries/redux.js'),
     },
     output: {
