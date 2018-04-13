@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DeleteTask = (props) => (
   <button 
@@ -8,5 +9,9 @@ const DeleteTask = (props) => (
     Delete
   </button> 
 )
+
+DeleteTask.propTypes = {
+  handleDeleteTask: PropTypes.func,
+}
 
 export default DeleteTask;

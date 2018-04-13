@@ -19,7 +19,7 @@ class Posts extends Component {
   componentDidMount() {
     this.initialFecth();
   }
-
+  // Esto solo se ejecuta antes de que un component se desmonta de la UI
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
