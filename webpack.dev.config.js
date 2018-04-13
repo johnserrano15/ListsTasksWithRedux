@@ -10,6 +10,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: {
     home: ['babel-polyfill', path.resolve(__dirname, 'src/entries/home.js')],
+    post: ['babel-polyfill', path.resolve(__dirname, 'src/entries/post.js')],
     // redux: path.resolve(__dirname, 'src/entries/redux.js'),
   },
   output: {
