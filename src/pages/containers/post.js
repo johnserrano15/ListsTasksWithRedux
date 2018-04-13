@@ -10,9 +10,8 @@ class PostPage extends Component {
     super(props);
 
     this.state = {
-      data: {},
       postsId: 1,
-      loading: false,
+      loading: true,
       posts: [],
     }
   }
@@ -23,6 +22,7 @@ class PostPage extends Component {
     this.setState({
       posts: this.state.posts.concat(post),
       postsId: this.state.postsId + 1,
+      loading: false,
     });
     window.addEventListener('scroll', this.handleScroll);
   }
@@ -36,31 +36,21 @@ class PostPage extends Component {
 
     const scrolled = window.scrollY;
     const viewportHeight = window.innerHeight;
-    const fullHeight = document.body.clientHeight;
+    // const fullHeight = document.body.clientHeight;
+    const fullHeight = document.documentElement.scrollHeight;
     // const fullHeight = document.documentElement.clientHeight;
-    /* console.info(`scrolled ${scrolled}`)
-    console.info(`viewportHeight ${viewportHeight}`)
-    console.info(`fullHeight ${fullHeight}`) */
+    // console.log(`scrolled -> ${scrolled} viewportHeight -> ${viewportHeight} fullHeight -> ${fullHeight} }`)
     // si es true cambio a false
     if (!(scrolled + viewportHeight + 300 >= fullHeight)) {
-      return null;
-    } else if (this.state.final) {
       return null;
     }
 
     return this.setState({ loading: true }, async () => {
       try {
         const post = await api.posts.getSingle(this.state.postsId);
-        // console.info(posts, posts.length)
-        // if (posts.length == 0) {
-        //   this.setState({
-        //     final: true,
-        //     loading: false,
-        //   })
-        // }
+        // console.info('pasoo')
 
         this.setState({
-          // posts: this.state.posts.concat(posts),
           posts: this.state.posts.concat(post),
           postsId: this.state.postsId + 1,
           loading: false,
@@ -70,7 +60,6 @@ class PostPage extends Component {
         this.setState({ loading: false });
       }
     });
-
   }
 
   render() {
