@@ -4,15 +4,15 @@ import PostsLayout from '../components/posts-layout';
 import Post from '../../posts/containers/post';
 
 class Posts extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
       page: 1,
       posts: [],
       loading: true,
-      final: false,
-    }
+      final: false
+    };
     this.handleScroll = this.handleScroll.bind(this);
   }
 
@@ -30,7 +30,7 @@ class Posts extends Component {
     this.setState({
       posts,
       page: this.state.page + 1,
-      loading: false,
+      loading: false
     });
     window.addEventListener('scroll', this.handleScroll);
   }
@@ -40,7 +40,8 @@ class Posts extends Component {
 
     const scrolled = window.scrollY;
     const viewportHeight = window.innerHeight;
-    const fullHeight = document.body.clientHeight;
+    // const fullHeight = document.body.clientHeight;
+    const fullHeight = document.documentElement.scrollHeight;
     // const fullHeight = document.documentElement.clientHeight;
     /* console.info(`scrolled ${scrolled}`)
     console.info(`viewportHeight ${viewportHeight}`)
@@ -59,36 +60,32 @@ class Posts extends Component {
         if (posts.length == 0) {
           this.setState({
             final: true,
-            loading: false,
-          })
+            loading: false
+          });
         }
 
         this.setState({
           posts: this.state.posts.concat(posts),
           page: this.state.page + 1,
-          loading: false,
+          loading: false
         });
       } catch (err) {
         console.error(err);
         this.setState({ loading: false });
       }
     });
-
   }
 
-  render(){
+  render() {
     return (
       <PostsLayout>
         <section>
           {this.state.posts.map(post => <Post key={post.id} {...post} />)}
 
-          {this.state.loading && (
-            <h2>loading posts...</h2>
-          )}
-
+          {this.state.loading && <h2>loading posts...</h2>}
         </section>
       </PostsLayout>
-    )
+    );
   }
 }
 

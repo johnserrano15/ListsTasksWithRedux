@@ -12,8 +12,8 @@ class PostPage extends Component {
     this.state = {
       postsId: 1,
       loading: true,
-      posts: [],
-    }
+      posts: []
+    };
   }
 
   async componentDidMount() {
@@ -22,7 +22,7 @@ class PostPage extends Component {
     this.setState({
       posts: this.state.posts.concat(post),
       postsId: this.state.postsId + 1,
-      loading: false,
+      loading: false
     });
     window.addEventListener('scroll', this.handleScroll);
   }
@@ -53,33 +53,29 @@ class PostPage extends Component {
         this.setState({
           posts: this.state.posts.concat(post),
           postsId: this.state.postsId + 1,
-          loading: false,
+          loading: false
         });
       } catch (err) {
         console.error(err);
         this.setState({ loading: false });
       }
     });
-  }
+  };
 
   render() {
     return (
       <HandleError>
         <PostLayout>
-          {
-            this.state.posts.map((post, index) => {
-              {/* console.log(post) */}
-              return (
-                <Post key={post.id} {...post} />
-              )
-            })
-          }
-          {this.state.loading && (
-            <h2>loading posts...</h2>
-          )}
+          {this.state.posts.map((post, index) => {
+            {
+              /* console.log(post) */
+            }
+            return <Post key={post.id} {...post} />;
+          })}
+          {this.state.loading && <h2>loading posts...</h2>}
         </PostLayout>
       </HandleError>
-    )
+    );
   }
 }
 
