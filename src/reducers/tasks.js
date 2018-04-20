@@ -6,7 +6,8 @@ const initialState = {
     }
   ],
   shouldHide: 0,
-  value: ''
+  value: '',
+  search: []
 };
 
 function tasks(state = initialState, action) {
@@ -58,6 +59,25 @@ function tasks(state = initialState, action) {
       // Limpiando array sin mutar el array siendo -> inmutable
       const newItems = items.filter(e => e.id !== action.payload.id);
       return { items: [...newItems] };
+    }
+
+    case 'SUBMIT_SEARCH': {
+      const list = state.items;
+      const results = [];
+      if (action.payload.query) {
+        list.filter(item => {
+          const text = item.text.toLowerCase();
+          const query = action.payload.query.toLowerCase();
+          if (text.includes(query)) {
+            // console.log(item);
+            results.push(item);
+          }
+        });
+      }
+
+      // console.log(results);
+
+      return { ...state, search: results };
     }
 
     default:

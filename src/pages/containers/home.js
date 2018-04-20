@@ -4,6 +4,7 @@ import Tasks from '../../tasks/containers/tasks';
 import HandleError from '../../error/containers/errores';
 import Posts from './posts';
 import { connect } from 'react-redux';
+import Search from '../components/search';
 
 class Home extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class Home extends Component {
             shouldHide={this.props.shouldHide}
             value={this.props.value}
           />
+          <Search search={this.props.search} />
         </HomeLayout>
         <Posts />
       </HandleError>
@@ -36,7 +38,8 @@ function mapStateToProps(state, props) {
   return {
     items: state.tasks.items,
     shouldHide: state.tasks.shouldHide,
-    value: state.tasks.value
+    value: state.tasks.value,
+    search: state.tasks.search
   };
 }
 

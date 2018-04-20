@@ -3,14 +3,14 @@ import TasksLayout from '../../tasks/components/tasks-layout';
 import AddTask from '../components/addTask';
 import ListTasks from '../components/listTasks';
 import { connect } from 'react-redux';
+import Search from '../components/search';
 
 class Tasks extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   value: '',
-    //   shouldHide: 0
-    // };
+    this.state = {
+      valueSearch: ''
+    };
   }
 
   handleAddtask = event => {
@@ -33,13 +33,6 @@ class Tasks extends Component {
 
   handleDeleteTask = id => {
     // console.log(id)
-
-    // console.log(newItems)
-
-    // this.setState({
-    //   items: newItems
-    // });
-
     this.props.dispatch({
       type: 'DELETE_TASK',
       payload: {
@@ -87,11 +80,38 @@ class Tasks extends Component {
     });
   };
 
+  setInputSearch = element => {
+    this.inputSearch = element;
+  };
+
+  handleChangeSearch = event => {
+    this.setState({
+      valueSearch: this.inputSearch.value
+    });
+  };
+
+  handleSearch = event => {
+    event.preventDefault();
+
+    this.props.dispatch({
+      type: 'SUBMIT_SEARCH',
+      payload: {
+        query: this.inputSearch.value
+      }
+    });
+  };
+
   render() {
     return (
       <TasksLayout>
         <AddTask setRef={this.setInputref} handleAddtask={this.handleAddtask} />
         <h3>Hola mundo {this.props.name}</h3>
+        <Search
+          setRef={this.setInputSearch}
+          value={this.state.valueSearch}
+          handleChange={this.handleChangeSearch}
+          handleSearch={this.handleSearch}
+        />
         <p>Agregar la siguiente task {this.props.items.length + 1}</p>
         <ListTasks
           items={this.props.items}
