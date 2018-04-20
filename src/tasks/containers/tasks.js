@@ -7,11 +7,10 @@ import { connect } from 'react-redux';
 class Tasks extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modalVisible: false,
-      value: '',
-      shouldHide: 0
-    };
+    // this.state = {
+    //   value: '',
+    //   shouldHide: 0
+    // };
   }
 
   handleAddtask = event => {
@@ -34,23 +33,29 @@ class Tasks extends Component {
 
   handleDeleteTask = id => {
     // console.log(id)
-    const items = this.state.items;
-    // console.info(items);
-    // Limpiando array sin mutar el array siendo -> inmutable
-    const newItems = items.filter(e => e.id !== id);
+
     // console.log(newItems)
 
-    this.setState({
-      items: newItems
+    // this.setState({
+    //   items: newItems
+    // });
+
+    this.props.dispatch({
+      type: 'DELETE_TASK',
+      payload: {
+        id
+      }
     });
   };
 
   handleUpdateTask = (id, text) => {
     // console.log('Hola update', id)
-    // console.info(this.inputUpdate.value)
-    this.setState({
-      shouldHide: id,
-      value: text
+    this.props.dispatch({
+      type: 'UPDATE_TASK',
+      payload: {
+        value: text,
+        shouldHide: id
+      }
     });
   };
 
@@ -60,32 +65,25 @@ class Tasks extends Component {
 
   handleChange = event => {
     // console.log('modificando');
-    this.setState({
-      // value: event.target.value,
-      value: this.inputUpdate.value
+    this.props.dispatch({
+      type: 'CHANGE_TASK',
+      payload: {
+        value: this.inputUpdate.value
+      }
     });
   };
 
   handleSubmitUpdate = event => {
     event.preventDefault();
     // console.log(event.target.idTask.value)
-    const items = this.state.items;
     const id = event.target.idTask.value;
 
-    const newItems = items.map(e => {
-      // console.log(e)
-      // console.info(id)
-      if (e.id == id) {
-        e.text = this.inputUpdate.value;
+    this.props.dispatch({
+      type: 'SUBMIT_UPDATE',
+      payload: {
+        id,
+        text: this.inputUpdate.value
       }
-      return e;
-    });
-
-    // console.log(newItems)
-
-    this.setState({
-      items: newItems,
-      shouldHide: 0
     });
   };
 
@@ -101,8 +99,8 @@ class Tasks extends Component {
           handleDeleteTask={this.handleDeleteTask}
           handleChange={this.handleChange}
           setRef={this.setInputUpdateRef}
-          value={this.state.value}
-          shouldHide={this.state.shouldHide}
+          value={this.props.value}
+          shouldHide={this.props.shouldHide}
           handleSubmitUpdate={this.handleSubmitUpdate}
         />
       </TasksLayout>

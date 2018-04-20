@@ -4,20 +4,12 @@ import { render } from 'react-dom';
 import Home from '../pages/containers/home';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducer from '../reducers/tasks';
-
-const initialState = {
-  items: [
-    {
-      id: 1,
-      text: 'first task'
-    }
-  ]
-};
+// import reducer from '../reducers/tasks';
+import reducer from '../reducers/index';
 
 const store = createStore(
   reducer,
-  initialState,
+  {}, // initialState se controla en el reducer
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

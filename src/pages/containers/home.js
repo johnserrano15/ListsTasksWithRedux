@@ -18,7 +18,12 @@ class Home extends Component {
     return (
       <HandleError>
         <HomeLayout>
-          <Tasks name={this.props.name} items={this.props.items} />
+          <Tasks
+            name={this.props.name}
+            items={this.props.items}
+            shouldHide={this.props.shouldHide}
+            value={this.props.value}
+          />
         </HomeLayout>
         <Posts />
       </HandleError>
@@ -27,9 +32,11 @@ class Home extends Component {
 }
 
 function mapStateToProps(state, props) {
-  console.log(state.items);
+  // console.log(state.tasks); // toma el nombre del reducer.
   return {
-    items: state.items
+    items: state.tasks.items,
+    shouldHide: state.tasks.shouldHide,
+    value: state.tasks.value
   };
 }
 
