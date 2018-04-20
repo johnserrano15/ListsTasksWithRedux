@@ -1,4 +1,4 @@
-# List of tasks with React
+# List of tasks with React and Redux
 
 ## Functionalities
 
@@ -8,7 +8,9 @@
 * prevState
 * components
 * containers
+
 ---
-1. Agg
-2. Update
-3. Delete
+
+1.  Agg
+2.  Update
+3.  Delete

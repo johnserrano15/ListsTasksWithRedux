@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import TasksLayout from '../../tasks/components/tasks-layout';
 import AddTask from '../components/addTask';
 import ListTasks from '../components/listTasks';
+import { connect } from 'react-redux';
 
 class Tasks extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalVisible: false,
-      items: [],
       value: '',
       shouldHide: 0
     };
@@ -17,19 +17,13 @@ class Tasks extends Component {
   handleAddtask = event => {
     event.preventDefault();
     // console.log(this.input.value, 'submit');
-    if (!this.input.value.length) {
-      return;
-    }
 
-    const newItem = {
-      text: this.input.value,
-      id: Date.now()
-    };
-
-    this.setState(prevState => ({
-      items: prevState.items.concat(newItem),
-      shouldHide: 0
-    }));
+    this.props.dispatch({
+      type: 'AGG_TASK',
+      payload: {
+        value: this.input.value
+      }
+    });
 
     this.input.value = '';
   };
@@ -100,9 +94,9 @@ class Tasks extends Component {
       <TasksLayout>
         <AddTask setRef={this.setInputref} handleAddtask={this.handleAddtask} />
         <h3>Hola mundo {this.props.name}</h3>
-        <p>Agregar la siguiente task {this.state.items.length + 2}</p>
+        <p>Agregar la siguiente task {this.props.items.length + 1}</p>
         <ListTasks
-          items={this.state.items}
+          items={this.props.items}
           handleUpdateTask={this.handleUpdateTask}
           handleDeleteTask={this.handleDeleteTask}
           handleChange={this.handleChange}
@@ -116,4 +110,4 @@ class Tasks extends Component {
   }
 }
 
-export default Tasks;
+export default connect()(Tasks);

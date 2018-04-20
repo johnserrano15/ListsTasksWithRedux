@@ -3,24 +3,34 @@ import HomeLayout from '../components/home-layout';
 import Tasks from '../../tasks/containers/tasks';
 import HandleError from '../../error/containers/errores';
 import Posts from './posts';
+import { connect } from 'react-redux';
+
 class Home extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      modalVisible: false,
-    }
+      modalVisible: false
+    };
   }
 
   render() {
+    // console.log(this.props.items);
     return (
       <HandleError>
         <HomeLayout>
-          <Tasks name={this.props.name}/>
+          <Tasks name={this.props.name} items={this.props.items} />
         </HomeLayout>
         <Posts />
       </HandleError>
-    )
+    );
   }
 }
 
-export default Home;
+function mapStateToProps(state, props) {
+  console.log(state.items);
+  return {
+    items: state.items
+  };
+}
+
+export default connect(mapStateToProps)(Home);
