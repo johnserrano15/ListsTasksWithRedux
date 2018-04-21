@@ -1,30 +1,20 @@
-import React from 'react'
-import DeleteTask from './deleteTask';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 function Task(props) {
-  const {
-    id,
-    text,
-    handleDeleteTask,
-    handleUpdateTask
-  } = props;
+  const { id, text, handleUpdateTask } = props;
   return (
-    <li key={id} onClick={handleUpdateTask.bind(null, id, text)} >
-      {text}
-      <DeleteTask
-        handleDeleteTask={handleDeleteTask}
-        id={id}
-      />
+    <li key={id}>
+      <span onClick={handleUpdateTask.bind(null, id, text)}>{text}</span>
+      {props.children}
     </li>
-  )
+  );
 }
 
 Task.propTypes = {
   id: PropTypes.number,
   text: PropTypes.string,
-  handleUpdateTask: PropTypes.func,
-  handleDeleteTask: PropTypes.func,
-}
+  handleUpdateTask: PropTypes.func
+};
 
 export default Task;
