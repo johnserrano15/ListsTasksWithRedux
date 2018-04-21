@@ -34,12 +34,12 @@ class Home extends Component {
 }
 
 function mapStateToProps(state, props) {
-  // console.log(state.tasks); // toma el nombre del reducer.
+  // console.log(state); // toma el nombre del reducer.
   return {
     items: state.tasks.data.items,
     shouldHide: state.tasks.data.shouldHide,
     value: state.tasks.data.value,
-    search: state.tasks.search
+    search: state.search
   };
 }
 

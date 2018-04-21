@@ -2,9 +2,7 @@ import React from 'react';
 
 function Search(props) {
   const { search } = props;
-  let listSearch;
-  console.log(search);
-  // console.log(listSearch);
+  // console.log(search);
   return (
     <ul>
       {search.map(item => {

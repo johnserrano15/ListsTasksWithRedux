@@ -8,8 +8,7 @@ const initialState = {
     ],
     shouldHide: 0,
     value: ''
-  },
-  search: []
+  }
 };
 
 function tasks(state = initialState, action) {
@@ -24,7 +23,7 @@ function tasks(state = initialState, action) {
 
       const newState = { items: [...state.data.items, newItem], shouldHide: 0 };
       // console.log(state);
-      return { ...state, data: { ...newState } };
+      return { data: { ...newState } };
     }
 
     case 'UPDATE_TASK': {
@@ -32,7 +31,6 @@ function tasks(state = initialState, action) {
       // console.log(state.data.items);
       // Cuando se da click sobre el li
       return {
-        ...state,
         data: {
           items: [...state.data.items],
           value: action.payload.value,
@@ -44,7 +42,6 @@ function tasks(state = initialState, action) {
     case 'CHANGE_TASK': {
       // le pasamos todo el data para mantener el state de shoulhiden
       return {
-        ...state,
         data: { ...state.data, value: action.payload.value }
       };
     }
@@ -62,7 +59,7 @@ function tasks(state = initialState, action) {
         return e;
       });
       // console.log(newItems);
-      return { ...state, data: { items: [...newItems], shouldHide: 0 } };
+      return { data: { items: [...newItems], shouldHide: 0 } };
     }
 
     case 'DELETE_TASK': {
@@ -70,27 +67,7 @@ function tasks(state = initialState, action) {
       // console.info(items);
       // Limpiando array sin mutar el array siendo -> inmutable
       const newItems = items.filter(e => e.id !== action.payload.id);
-      return { ...state, data: { items: [...newItems] } };
-    }
-
-    case 'SUBMIT_SEARCH': {
-      const list = state.data.items;
-      // console.log(list);
-      const results = [];
-      if (action.payload.query) {
-        list.filter(item => {
-          const text = item.text.toLowerCase();
-          const query = action.payload.query.toLowerCase();
-          if (text.includes(query)) {
-            // console.log(item);
-            results.push(item);
-          }
-        });
-      }
-
-      // console.log(results);
-
-      return { ...state, search: results };
+      return { data: { items: [...newItems] } };
     }
 
     default:

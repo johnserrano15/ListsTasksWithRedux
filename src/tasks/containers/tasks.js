@@ -96,7 +96,8 @@ class Tasks extends Component {
     this.props.dispatch({
       type: 'SUBMIT_SEARCH',
       payload: {
-        query: this.inputSearch.value
+        query: this.inputSearch.value,
+        items: this.props.items
       }
     });
   };
