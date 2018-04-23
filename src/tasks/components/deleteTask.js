@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DeleteTask = (props) => (
-  <button 
-    onClick={props.handleDeleteTask.bind(null, props.id)} 
-    id={props.id}
-  >
+const DeleteTask = ({ handleDeleteTask, id }) => (
+  <button onClick={handleDeleteTask} id={id}>
     Delete
-  </button> 
-)
+  </button>
+);
 
 DeleteTask.propTypes = {
-  handleDeleteTask: PropTypes.func,
-}
+  handleDeleteTask: PropTypes.func
+};
 
 export default DeleteTask;

@@ -5,7 +5,7 @@ function Task(props) {
   const { id, text, handleUpdateTask } = props;
   return (
     <li key={id}>
-      <span onClick={handleUpdateTask.bind(null, id, text)}>{text}</span>
+      <span onClick={handleUpdateTask}>{text}</span>
       {props.children}
     </li>
   );
