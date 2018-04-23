@@ -5,6 +5,7 @@ import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
 import Footer from '../components/Footer';
 import { connect } from 'react-redux';
+import { addTodo, toggleTodo } from '../../actions/index';
 
 class ListContainer extends Component {
   constructor(props) {
@@ -13,13 +14,14 @@ class ListContainer extends Component {
 
   onAddClick = () => {
     // console.log(`text -> ${this.input.value}`);
-    this.props.dispatch({
+    /* this.props.dispatch({
       type: 'ADD_TODO',
       payload: {
         id: Date.now(),
         text: this.input.value
       }
-    });
+    }); */
+    this.props.addTodo(this.input.value);
     this.input.value = '';
   };
 
@@ -28,40 +30,29 @@ class ListContainer extends Component {
   };
 
   onTodoClick = id => {
-    this.props.dispatch({
+    /* this.props.dispatch({
       type: 'TOGGLE_TODO',
       payload: {
         id
       }
-    });
+    }); */
+    this.props.toggleTodo(id);
   };
 
   render() {
     return (
       <ListLayout>
         <AddTodo setRef={this.setInput} onAddClick={this.onAddClick} />
-        <TodoList
-          todos={getVisibleTodos(this.props.data, this.props.filter)}
-          onTodoClick={this.onTodoClick}
-        />
-        <Footer visibilityFilter={this.props.filter} />
+        <TodoList todos={this.props.data} onTodoClick={this.onTodoClick} />
+        <Footer />
       </ListLayout>
     );
   }
 }
 
-const getVisibleTodos = (todos, filter) => {
-  switch (filter) {
-    case 'SHOW_ALL':
-      return todos;
-    case 'SHOW_COMPLETED':
-      // Este filter es una function propia de JavaScript
-      // Entonces donde t.completed sea true
-      return todos.filter(t => t.completed);
-    case 'SHOW_ACTIVE':
-      // Aca es lo mismo si es true lo cambia a false entonces ese no es Activate
-      return todos.filter(t => !t.completed);
-  }
+const mapDispatchToProps = {
+  addTodo,
+  toggleTodo
 };
 
-export default connect()(ListContainer);
+export default connect(null, mapDispatchToProps)(ListContainer);

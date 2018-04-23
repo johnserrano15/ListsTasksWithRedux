@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { setVisibilityFilter } from '../../actions/index';
 class FilterLink extends Component {
   onClick = () => {
-    this.props.dispatch({
+    /* this.props.dispatch({
       type: 'SET_VISIBILITY_FILTER',
       payload: {
         filter: this.props.filter
       }
-    });
+    }); */
+
+    this.props.setVisibilityFilter(this.props.filter);
   };
 
   render() {
@@ -41,4 +44,13 @@ const Link = ({ active, children, onClick }) => {
   );
 };
 
-export default connect()(FilterLink);
+const mapDispatchToProps = {
+  setVisibilityFilter
+};
+
+function mapStateToProps(state, props) {
+  // console.log(state);
+  return { visibilityFilter: state.listFilter };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterLink);

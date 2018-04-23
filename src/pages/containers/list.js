@@ -18,7 +18,7 @@ class List extends Component {
       <HandleError>
         <ListLayout>
           <h3>Hola mundo</h3>
-          <ListContainer data={this.props.data} filter={this.props.filter} />
+          <ListContainer data={this.props.data} />
         </ListLayout>
       </HandleError>
     );
@@ -28,9 +28,22 @@ class List extends Component {
 function mapStateToProps(state, props) {
   // console.log(state); // toma el nombre del reducer.
   return {
-    data: state.list,
-    filter: state.listFilter
+    data: getVisibleTodos(state.list, state.listFilter)
   };
 }
+
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_COMPLETED':
+      // Este filter es una function propia de JavaScript
+      // Entonces donde t.completed sea true
+      return todos.filter(t => t.completed);
+    case 'SHOW_ACTIVE':
+      // Aca es lo mismo si es true lo cambia a false entonces ese no es Activate
+      return todos.filter(t => !t.completed);
+  }
+};
 
 export default connect(mapStateToProps)(List);
