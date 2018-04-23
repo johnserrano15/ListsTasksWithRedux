@@ -43,10 +43,10 @@ class ListContainer extends Component {
     return (
       <ListLayout>
         <AddTodo setRef={this.setInput} onAddClick={this.onAddClick} />
-        {/* <TodoList
+        <TodoList
           todos={getVisibleTodos(this.props.data, this.props.filter)}
           onTodoClick={this.onTodoClick}
-        /> */}
+        />
         <Footer />
       </ListLayout>
     );

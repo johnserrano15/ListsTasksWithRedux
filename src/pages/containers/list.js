@@ -18,7 +18,7 @@ class List extends Component {
       <HandleError>
         <ListLayout>
           <h3>Hola mundo</h3>
-          <ListContainer data={this.props.data} />
+          <ListContainer data={this.props.data} filter={this.props.filter} />
         </ListLayout>
       </HandleError>
     );
@@ -28,7 +28,7 @@ class List extends Component {
 function mapStateToProps(state, props) {
   console.log(state); // toma el nombre del reducer.
   return {
-    data: state.list.data,
+    data: state.list,
     filter: state.listFilter
   };
 }
