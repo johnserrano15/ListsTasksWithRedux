@@ -24,14 +24,6 @@ class Tasks extends Component {
   handleAddtask = event => {
     event.preventDefault();
     // console.log(this.input.value, 'submit');
-
-    /* this.props.dispatch({
-      type: 'AGG_TASK',
-      payload: {
-        value: this.input.value
-      }
-    }); */
-
     this.props.aggTask(this.input.value);
 
     this.input.value = '';
@@ -43,26 +35,12 @@ class Tasks extends Component {
 
   handleDeleteTask = id => {
     // console.log(id)
-    /* this.props.dispatch({
-      type: 'DELETE_TASK',
-      payload: {
-        id
-      }
-    }); */
 
     this.props.deleteTask(id);
   };
 
   handleUpdateTask = (id, text) => {
     // console.log('Hola update', id)
-    /* this.props.dispatch({
-      type: 'UPDATE_TASK',
-      payload: {
-        value: text,
-        shouldHide: id
-      }
-    });
- */
     this.props.updateTask(id, text);
   };
 
@@ -72,13 +50,6 @@ class Tasks extends Component {
 
   handleChange = event => {
     // console.log('modificando');
-    /* this.props.dispatch({
-      type: 'CHANGE_TASK',
-      payload: {
-        value: this.inputUpdate.value
-      }
-    }); */
-
     this.props.changetask(this.inputUpdate.value);
   };
 
@@ -87,14 +58,6 @@ class Tasks extends Component {
     // console.log(event.target.idTask.value)
     const id = event.target.idTask.value;
 
-    /* this.props.dispatch({
-      type: 'SUBMIT_UPDATE',
-      payload: {
-        id,
-        text: this.inputUpdate.value
-      }
-    });
- */
     this.props.submitUpdate(id, this.inputUpdate.value);
   };
 
@@ -110,14 +73,6 @@ class Tasks extends Component {
 
   handleSearch = event => {
     event.preventDefault();
-
-    /* this.props.dispatch({
-      type: 'SUBMIT_SEARCH',
-      payload: {
-        query: this.inputSearch.value,
-        items: this.props.items
-      }
-    }); */
 
     this.props.submitSearch(this.inputSearch.value, this.props.items);
   };
