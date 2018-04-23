@@ -3,13 +3,6 @@ import { connect } from 'react-redux';
 import { setVisibilityFilter } from '../../actions/index';
 class FilterLink extends Component {
   onClick = () => {
-    /* this.props.dispatch({
-      type: 'SET_VISIBILITY_FILTER',
-      payload: {
-        filter: this.props.filter
-      }
-    }); */
-
     this.props.setVisibilityFilter(this.props.filter);
   };
 

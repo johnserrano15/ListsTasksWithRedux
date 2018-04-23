@@ -14,13 +14,6 @@ class ListContainer extends Component {
 
   onAddClick = () => {
     // console.log(`text -> ${this.input.value}`);
-    /* this.props.dispatch({
-      type: 'ADD_TODO',
-      payload: {
-        id: Date.now(),
-        text: this.input.value
-      }
-    }); */
     this.props.addTodo(this.input.value);
     this.input.value = '';
   };
@@ -30,12 +23,6 @@ class ListContainer extends Component {
   };
 
   onTodoClick = id => {
-    /* this.props.dispatch({
-      type: 'TOGGLE_TODO',
-      payload: {
-        id
-      }
-    }); */
     this.props.toggleTodo(id);
   };
 
