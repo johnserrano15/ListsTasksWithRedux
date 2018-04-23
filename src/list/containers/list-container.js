@@ -47,7 +47,7 @@ class ListContainer extends Component {
           todos={getVisibleTodos(this.props.data, this.props.filter)}
           onTodoClick={this.onTodoClick}
         />
-        <Footer />
+        <Footer visibilityFilter={this.props.filter} />
       </ListLayout>
     );
   }
