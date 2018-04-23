@@ -12,7 +12,7 @@ class ListContainer extends Component {
   }
 
   onAddClick = () => {
-    console.log(`text -> ${this.input.value}`);
+    // console.log(`text -> ${this.input.value}`);
     this.props.dispatch({
       type: 'ADD_TODO',
       payload: {
@@ -34,12 +34,9 @@ class ListContainer extends Component {
         id
       }
     });
-    console.log('click');
   };
 
   render() {
-    console.log(this.props.filter);
-    console.log(this.props.data);
     return (
       <ListLayout>
         <AddTodo setRef={this.setInput} onAddClick={this.onAddClick} />

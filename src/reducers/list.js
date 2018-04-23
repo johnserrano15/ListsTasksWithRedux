@@ -9,6 +9,7 @@ const todos = (state = [], action) => {
 
       return [...state, data];
     }
+
     case 'TOGGLE_TODO': {
       const newState = state.map(t => {
         if (action.payload.id == t.id) {

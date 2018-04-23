@@ -2,7 +2,7 @@ import React from 'react';
 import Todo from './Todo';
 
 function TodoList({ todos, onTodoClick }) {
-  console.log(todos);
+  // console.log(todos);
   return (
     <ul>
       {todos.map(todo => (
