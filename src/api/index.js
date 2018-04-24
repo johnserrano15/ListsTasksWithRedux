@@ -31,7 +31,7 @@ const api = {
   movies: {
     async getMovies(page = 1) {
       const response = await fetch(
-        `${baseMovies}/?apikey=${movies}&s=avengers&page=${page}`
+        `${baseMovies}/?apikey=${movies}&s=batman&page=${page}`
       );
       const data = await response.json();
       return data;

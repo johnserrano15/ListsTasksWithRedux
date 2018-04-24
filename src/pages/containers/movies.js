@@ -28,7 +28,7 @@ class Movies extends Component {
 }
 
 function mapStateToProps(state, props) {
-  console.log(state); // toma el nombre del reducer.
+  // console.log(state); // toma el nombre del reducer.
   return {
     data: state.dataMovies,
     likesCount: state.likesCount

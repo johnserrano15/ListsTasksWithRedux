@@ -14,16 +14,18 @@ class Movies extends Component {
 
   async componentDidMount() {
     const movies = await this.props.data;
-    console.log(movies);
+    // console.log(movies);
     this.setState({ movies });
   }
 
   async componentWillReceiveProps(nextProps) {
-    console.info(nextProps);
+    // console.info(nextProps);
     const movies = await nextProps.data;
-    this.setState({
-      movies
-    });
+    if (movies != this.state.movies) {
+      this.setState({
+        movies
+      });
+    }
   }
 
   handlerClickLike = (id, like, unlike) => {
