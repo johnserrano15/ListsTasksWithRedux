@@ -1,8 +1,14 @@
 import React from 'react';
 import Movie from './movie';
+import Footer from './footer';
 import './listMovies.sass';
 
-const ListMovies = ({ movies, handlerClickLike, handlerClickUnlike }) => (
+const ListMovies = ({
+  movies,
+  handlerClickLike,
+  handlerClickUnlike,
+  likesCount
+}) => (
   <ul className="listMovies">
     {movies.map((movie, index) => (
       <Movie
@@ -16,6 +22,7 @@ const ListMovies = ({ movies, handlerClickLike, handlerClickUnlike }) => (
         }
       />
     ))}
+    <Footer {...likesCount} all={movies.length} />
   </ul>
 );
 

@@ -30,21 +30,23 @@ const likesCount = (state = initialState.likesCount, action) => {
           ? state.likeCount + 1
           : state.likeCount - 1,
         unlikeCount:
-          !action.like && action.unlike
+          !action.payload.like && action.payload.unlike
             ? state.unlikeCount - 1
             : state.unlikeCount
       };
-      return state;
+      return likes;
     }
     case 'UNLIKE': {
       const unlikes = {
-        unlikeCount: !action.unlike
+        unlikeCount: !action.payload.unlike
           ? state.unlikeCount + 1
           : state.unlikeCount - 1,
         likeCount:
-          !action.unlike && action.like ? state.likeCount - 1 : state.likeCount
+          !action.payload.unlike && action.payload.like
+            ? state.likeCount - 1
+            : state.likeCount
       };
-      return state;
+      return unlikes;
     }
     default:
       return state;
