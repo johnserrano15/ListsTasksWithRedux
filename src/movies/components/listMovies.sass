@@ -1,0 +1,51 @@
+.listMovies
+  padding: 0
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-around
+  .movie
+    margin-bottom: 30px
+    list-style: none
+    .Movie-content
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      width: 300px
+
+    .Movie-meta
+      padding: 15px 15px 0 15px
+      >
+        h2
+          margin: 0
+        p
+          font-size: 14px
+          margin: 0
+          margin-top: 15px
+
+    .Movie-actions
+      box-sizing: border-box
+      padding: 15px
+      > span
+        border-radius: 50%
+        font-size: 25px
+        padding: 8px 10px
+        cursor: pointer
+        border: 1px solid #888
+        color: #999
+    .icon-like
+      margin-right: 10px
+      &:hover
+        color: green
+        border: 1px solid green
+
+    .is-liked
+      color: green !important
+      border: 1px solid green !important
+
+    .is-unliked
+      color: red !important
+      border: 1px solid red !important
+
+    .icon-unlike:hover
+      color: red
+      border: 1px solid red

@@ -1,4 +1,7 @@
+import { movies } from './keys';
+
 const baseUrl = 'https://jsonplaceholder.typicode.com';
+const baseMovies = 'http://www.omdbapi.com'; // Mas info -> http://www.omdbapi.com/
 
 const api = {
   posts: {
@@ -16,15 +19,24 @@ const api = {
       const response = await fetch(`${baseUrl}/posts/${id}/comments`);
       const data = await response.json();
       return data;
-    },
+    }
   },
   users: {
     async getSingle(id = 1) {
       const response = await fetch(`${baseUrl}/users/${id}`);
       const data = await response.json();
       return data;
-    },
+    }
   },
+  movies: {
+    async getMovies(page = 1) {
+      const response = await fetch(
+        `${baseMovies}/?apikey=${movies}&s=batman&page=${page}`
+      );
+      const data = await response.json();
+      return data;
+    }
+  }
 };
 
 export default api;

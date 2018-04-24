@@ -11,7 +11,8 @@ module.exports = {
   entry: {
     home: ['babel-polyfill', path.resolve(__dirname, 'src/entries/home.js')],
     post: ['babel-polyfill', path.resolve(__dirname, 'src/entries/post.js')],
-    list: ['babel-polyfill', path.resolve(__dirname, 'src/entries/list.js')]
+    list: ['babel-polyfill', path.resolve(__dirname, 'src/entries/list.js')],
+    movies: ['babel-polyfill', path.resolve(__dirname, 'src/entries/movies.js')]
     // redux: path.resolve(__dirname, 'src/entries/redux.js'),
   },
   output: {
