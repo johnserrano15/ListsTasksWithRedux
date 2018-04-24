@@ -1,8 +1,14 @@
 import React from 'react';
 
-const Movie = ({ Poster, Title, Year }) => {
-  const like = false,
-    unlike = false;
+const Movie = ({
+  Poster,
+  Title,
+  Year,
+  handlerClickLike,
+  handlerClickUnlike,
+  like,
+  unlike
+}) => {
   return (
     <li className="movie">
       <img src={Poster} alt={Title} />
@@ -13,10 +19,16 @@ const Movie = ({ Poster, Title, Year }) => {
           </h2>
         </div>
         <div className="Movie-actions">
-          <span className={`icon-like ${like ? 'is-liked' : ''}`}>
+          <span
+            onClick={handlerClickLike}
+            className={`icon-like ${like ? 'is-liked' : ''}`}
+          >
             &#10003;
           </span>
-          <span className={`icon-unlike ${unlike ? 'is-unliked' : ''}`}>
+          <span
+            onClick={handlerClickUnlike}
+            className={`icon-unlike ${unlike ? 'is-unliked' : ''}`}
+          >
             &#10005;
           </span>
         </div>

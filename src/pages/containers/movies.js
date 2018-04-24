@@ -17,7 +17,10 @@ class Movies extends Component {
     return (
       <HandleError>
         <MoviesLayout>
-          <MoviesContainer data={this.props.data} />
+          <MoviesContainer
+            data={this.props.data}
+            likesCount={this.props.likesCount}
+          />
         </MoviesLayout>
       </HandleError>
     );
@@ -25,9 +28,10 @@ class Movies extends Component {
 }
 
 function mapStateToProps(state, props) {
-  // console.log(state); // toma el nombre del reducer.
+  console.log(state); // toma el nombre del reducer.
   return {
-    data: state.data
+    data: state.dataMovies,
+    likesCount: state.likesCount
   };
 }
 
