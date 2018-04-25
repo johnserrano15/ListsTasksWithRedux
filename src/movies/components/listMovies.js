@@ -18,7 +18,7 @@ const ListMovies = ({
           handlerClickLike(movie.imdbID, movie.like, movie.unlike)
         }
         handlerClickUnlike={() =>
-          handlerClickUnlike(movie.imdbID, movie.unLike, movie.like)
+          handlerClickUnlike(movie.imdbID, movie.like, movie.unlike)
         }
       />
     ))}

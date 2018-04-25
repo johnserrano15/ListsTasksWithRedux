@@ -39,7 +39,7 @@ class Movies extends Component {
     });
   };
 
-  handlerClickUnlike = (id, unlike, like) => {
+  handlerClickUnlike = (id, like, unlike) => {
     this.props.dispatch({
       type: 'UNLIKE',
       payload: {
@@ -48,6 +48,21 @@ class Movies extends Component {
         like
       }
     });
+  };
+
+  handlerSubmitSearch = event => {
+    event.preventDefault();
+    console.info(this.input.value);
+    this.props.dispatch({
+      type: 'SEARCH',
+      payload: {
+        value: this.input.value
+      }
+    });
+  };
+
+  setRef = element => {
+    this.input = element;
   };
 
   render() {
@@ -60,6 +75,15 @@ class Movies extends Component {
           handlerClickLike={this.handlerClickLike}
           handlerClickUnlike={this.handlerClickUnlike}
         />
+        <form id="buscador" onSubmit={this.handlerSubmitSearch}>
+          <input
+            ref={this.setRef}
+            type="text"
+            name="nameMovie"
+            placeholder="Name movie"
+          />
+          <input type="submit" id="buscarMovie" value="Buscar" />
+        </form>
       </MoviesLayout>
     );
   }

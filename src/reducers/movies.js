@@ -10,9 +10,18 @@ const movies = async () => {
       unlike: false
     };
   });
-  // console.log(dataMovies);
+  console.log(dataMovies);
   return dataMovies;
 };
+/* const listMovies = [];
+for (let index = 0; index < 10; index++) {
+  listMovies[index] = {
+    like: false,
+    unlike: false
+  };
+}
+
+console.log(listMovies); */
 
 const initialState = {
   likesCount: {
@@ -29,10 +38,9 @@ const likesCount = (state = initialState.likesCount, action) => {
         likeCount: !action.payload.like
           ? state.likeCount + 1
           : state.likeCount - 1,
-        unlikeCount:
-          !action.payload.like && action.payload.unlike
-            ? state.unlikeCount - 1
-            : state.unlikeCount
+        unlikeCount: action.payload.unlike
+          ? state.unlikeCount - 1
+          : state.unlikeCount
       };
       return likes;
     }
@@ -41,10 +49,7 @@ const likesCount = (state = initialState.likesCount, action) => {
         unlikeCount: !action.payload.unlike
           ? state.unlikeCount + 1
           : state.unlikeCount - 1,
-        likeCount:
-          !action.payload.unlike && action.payload.like
-            ? state.likeCount - 1
-            : state.likeCount
+        likeCount: action.payload.like ? state.likeCount - 1 : state.likeCount
       };
       return unlikes;
     }
@@ -80,6 +85,7 @@ const dataMovies = (state = initialState.data, action) => {
           if (movie.imdbID !== action.payload.id) {
             return movie;
           }
+          // console.log(movie);
           return {
             ...movie,
             like: !movie.unlike ? false : movie.like,
@@ -89,6 +95,17 @@ const dataMovies = (state = initialState.data, action) => {
       });
       return newState;
     }
+    default:
+      return state;
+  }
+};
+
+const searchMovies = (state = [], action) => {
+  switch (action.type) {
+    case 'SEARCH': {
+      return state;
+    }
+
     default:
       return state;
   }
