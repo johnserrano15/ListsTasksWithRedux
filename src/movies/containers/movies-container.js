@@ -3,6 +3,7 @@ import MoviesLayout from '../components/movies-layout';
 import ListMovies from '../components/listMovies';
 import api from '../../api/index';
 import { connect } from 'react-redux';
+import { like, unlike, searchMovies } from '../../actions/index';
 
 class Movies extends Component {
   constructor(props) {
@@ -30,36 +31,39 @@ class Movies extends Component {
   }
 
   handlerClickLike = (id, like, unlike) => {
-    this.props.dispatch({
-      type: 'LIKE',
-      payload: {
-        id,
-        like,
-        unlike
-      }
-    });
+    // this.props.dispatch({
+    //   type: 'LIKE',
+    //   payload: {
+    //     id,
+    //     like,
+    //     unlike
+    //   }
+    // });
+    this.props.like(id, like, unlike);
   };
 
   handlerClickUnlike = (id, like, unlike) => {
-    this.props.dispatch({
-      type: 'UNLIKE',
-      payload: {
-        id,
-        unlike,
-        like
-      }
-    });
+    // this.props.dispatch({
+    //   type: 'UNLIKE',
+    //   payload: {
+    //     id,
+    //     unlike,
+    //     like
+    //   }
+    // });
+    this.props.unlike(id, unlike, like);
   };
 
   handlerSubmitSearch = event => {
     event.preventDefault();
     // console.info(this.input.value);
-    this.props.dispatch({
-      type: 'SEARCH',
-      payload: {
-        value: this.input.value
-      }
-    });
+    // this.props.dispatch({
+    //   type: 'SEARCH',
+    //   payload: {
+    //     value: this.input.value
+    //   }
+    // });
+    this.props.searchMovies(this.input.value);
 
     this.input.value = '';
   };
@@ -92,4 +96,10 @@ class Movies extends Component {
   }
 }
 
-export default connect()(Movies);
+const mapDispatchToProps = {
+  like,
+  unlike,
+  searchMovies
+};
+
+export default connect(null, mapDispatchToProps)(Movies);

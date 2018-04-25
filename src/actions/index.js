@@ -39,3 +39,15 @@ export const submitUpdate = (id, text) => {
 export const submitSearch = (query, items) => {
   return { type: 'SUBMIT_SEARCH', payload: { query, items } };
 };
+
+export const like = (id, like, unlike) => {
+  return { type: 'LIKE', payload: { id, like, unlike } };
+};
+
+export const unlike = (id, unlike, like) => {
+  return { type: 'UNLIKE', payload: { id, unlike, like } };
+};
+
+export const searchMovies = value => {
+  return { type: 'SEARCH', payload: { value } };
+};
