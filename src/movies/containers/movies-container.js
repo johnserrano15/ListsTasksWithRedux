@@ -52,13 +52,15 @@ class Movies extends Component {
 
   handlerSubmitSearch = event => {
     event.preventDefault();
-    console.info(this.input.value);
+    // console.info(this.input.value);
     this.props.dispatch({
       type: 'SEARCH',
       payload: {
         value: this.input.value
       }
     });
+
+    this.input.value = '';
   };
 
   setRef = element => {

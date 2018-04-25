@@ -7,9 +7,6 @@ import MoviesContainer from '../../movies/containers/movies-container';
 class Movies extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modalVisible: false
-    };
   }
 
   render() {

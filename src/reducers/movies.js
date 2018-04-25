@@ -1,27 +1,37 @@
 import api from '../api/index';
 
 const movies = async () => {
-  const listMovies = await api.movies.getMovies();
-  const dataMovies = [];
-  listMovies.Search.map((movie, index) => {
-    dataMovies[index] = {
-      ...movie,
-      like: false,
-      unlike: false
-    };
-  });
-  console.log(dataMovies);
-  return dataMovies;
+  try {
+    const listMovies = await api.movies.getMovies();
+    const dataMovies = [];
+    listMovies.Search.map((movie, index) => {
+      dataMovies[index] = {
+        ...movie,
+        like: false,
+        unlike: false
+      };
+    });
+    // console.log(dataMovies);
+    return dataMovies;
+  } catch (err) {
+    console.log(`Algo salio mal ${err}`);
+  }
 };
-/* const listMovies = [];
-for (let index = 0; index < 10; index++) {
-  listMovies[index] = {
-    like: false,
-    unlike: false
-  };
-}
 
-console.log(listMovies); */
+async function search(name) {
+  try {
+    const listMovies = await api.movies.getMovies(null, name);
+    const dataMovies = [];
+    console.log(listMovies);
+    listMovies.Search.map((movie, index) => {
+      dataMovies[index] = { ...movie, like: false, unlike: false };
+    });
+    // console.log(dataMovies);
+    return dataMovies;
+  } catch (err) {
+    console.log(`Algo salio mal ${err}`);
+  }
+}
 
 const initialState = {
   likesCount: {
@@ -44,6 +54,7 @@ const likesCount = (state = initialState.likesCount, action) => {
       };
       return likes;
     }
+
     case 'UNLIKE': {
       const unlikes = {
         unlikeCount: !action.payload.unlike
@@ -53,6 +64,14 @@ const likesCount = (state = initialState.likesCount, action) => {
       };
       return unlikes;
     }
+
+    case 'SEARCH': {
+      if (!action.payload.value.length) {
+        return state;
+      }
+      return { likeCount: 0, unlikeCount: 0 };
+    }
+
     default:
       return state;
   }
@@ -95,15 +114,13 @@ const dataMovies = (state = initialState.data, action) => {
       });
       return newState;
     }
-    default:
-      return state;
-  }
-};
 
-const searchMovies = (state = [], action) => {
-  switch (action.type) {
     case 'SEARCH': {
-      return state;
+      if (!action.payload.value.length) {
+        return state;
+      }
+
+      return search(action.payload.value);
     }
 
     default:
