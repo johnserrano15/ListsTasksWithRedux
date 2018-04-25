@@ -1,10 +1,11 @@
 import api from '../api/index';
+import { SEARCH, LIKE, UNLIKE } from '../actions/types';
 
 const movies = async () => {
   try {
     const listMovies = await api.movies.getMovies();
     const dataMovies = [];
-
+    // console.log(listMovies);
     listMovies.Search.map((movie, index) => {
       dataMovies[index] = {
         ...movie,
@@ -47,7 +48,7 @@ const initialState = {
 
 const likesCount = (state = initialState.likesCount, action) => {
   switch (action.type) {
-    case 'LIKE': {
+    case LIKE: {
       const likes = {
         likeCount: !action.payload.like
           ? state.likeCount + 1
@@ -59,7 +60,7 @@ const likesCount = (state = initialState.likesCount, action) => {
       return likes;
     }
 
-    case 'UNLIKE': {
+    case UNLIKE: {
       const unlikes = {
         unlikeCount: !action.payload.unlike
           ? state.unlikeCount + 1
@@ -69,7 +70,7 @@ const likesCount = (state = initialState.likesCount, action) => {
       return unlikes;
     }
 
-    case 'SEARCH': {
+    case SEARCH: {
       if (!action.payload.value.length) {
         return state;
       }
@@ -86,7 +87,7 @@ const dataMovies = (state = initialState.data, action) => {
     case 'ADD': {
       return [...state, like(undefined, action)];
     }
-    case 'LIKE': {
+    case LIKE: {
       const newState = state.then(movies => {
         // console.info(state);
         return movies.map(movie => {
@@ -102,7 +103,7 @@ const dataMovies = (state = initialState.data, action) => {
       });
       return newState;
     }
-    case 'UNLIKE': {
+    case UNLIKE: {
       const newState = state.then(movies => {
         return movies.map(movie => {
           if (movie.imdbID !== action.payload.id) {
@@ -119,7 +120,7 @@ const dataMovies = (state = initialState.data, action) => {
       return newState;
     }
 
-    case 'SEARCH': {
+    case SEARCH: {
       if (!action.payload.value.length) {
         return state;
       }

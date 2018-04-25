@@ -1,3 +1,4 @@
+import { SEARCH, LIKE, UNLIKE } from './types';
 export function addTodo(value) {
   return {
     type: 'ADD_TODO',
@@ -41,13 +42,13 @@ export const submitSearch = (query, items) => {
 };
 
 export const like = (id, like, unlike) => {
-  return { type: 'LIKE', payload: { id, like, unlike } };
+  return { type: LIKE, payload: { id, like, unlike } };
 };
 
 export const unlike = (id, unlike, like) => {
-  return { type: 'UNLIKE', payload: { id, unlike, like } };
+  return { type: UNLIKE, payload: { id, unlike, like } };
 };
 
 export const searchMovies = value => {
-  return { type: 'SEARCH', payload: { value } };
+  return { type: SEARCH, payload: { value } };
 };
