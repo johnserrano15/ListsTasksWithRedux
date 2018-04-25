@@ -4,6 +4,7 @@ const movies = async () => {
   try {
     const listMovies = await api.movies.getMovies();
     const dataMovies = [];
+
     listMovies.Search.map((movie, index) => {
       dataMovies[index] = {
         ...movie,
@@ -11,6 +12,7 @@ const movies = async () => {
         unlike: false
       };
     });
+
     // console.log(dataMovies);
     return dataMovies;
   } catch (err) {
@@ -22,10 +24,12 @@ async function search(name) {
   try {
     const listMovies = await api.movies.getMovies(null, name);
     const dataMovies = [];
-    console.log(listMovies);
-    listMovies.Search.map((movie, index) => {
-      dataMovies[index] = { ...movie, like: false, unlike: false };
-    });
+    // console.log(listMovies);
+    if (listMovies.Response !== 'False') {
+      listMovies.Search.map((movie, index) => {
+        dataMovies[index] = { ...movie, like: false, unlike: false };
+      });
+    }
     // console.log(dataMovies);
     return dataMovies;
   } catch (err) {

@@ -21,6 +21,7 @@ class Movies extends Component {
   async componentWillReceiveProps(nextProps) {
     // console.info(nextProps);
     const movies = await nextProps.data;
+    // console.log(movies);
     if (movies != this.state.movies) {
       this.setState({
         movies
