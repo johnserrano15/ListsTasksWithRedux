@@ -6,6 +6,9 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 // import reducer from '../reducers/tasks';
 import reducer from '../reducers/index';
+import normalizedData from '../schemas/index';
+
+console.log(normalizedData);
 
 const store = createStore(
   reducer,
