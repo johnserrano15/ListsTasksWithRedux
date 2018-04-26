@@ -4,6 +4,7 @@ import search from './search';
 import list from './list';
 import listFilter from './listFilter';
 import { dataMovies, likesCount } from './movies';
+import isLoading from './loading';
 
 import { combineReducers } from 'redux';
 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   list,
   listFilter,
   dataMovies,
-  likesCount
+  likesCount,
+  isLoading
 });
 
 export default rootReducer;

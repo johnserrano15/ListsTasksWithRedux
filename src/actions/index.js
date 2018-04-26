@@ -1,5 +1,5 @@
 import * as type from './types';
-import api from '../api/index';
+// import api from '../api/index';
 
 export function addTodo(value) {
   return {
@@ -58,7 +58,7 @@ export const searchMovies = dataMovies => {
 
 // ReduxThunk
 export const searchMoviesAsync = value => {
-  return dispatch => {
+  return (dispatch, getState, api) => {
     async function search(name) {
       try {
         const listMovies = await api.movies.getMovies(null, name);
@@ -80,8 +80,13 @@ export const searchMoviesAsync = value => {
       return null;
     }
 
+    dispatch(isLoading(true));
+
     return search(value)
-      .then(data => dispatch(searchMovies(data)))
+      .then(data => {
+        dispatch(isLoading(false));
+        dispatch(searchMovies(data));
+      })
       .catch(error => {
         throw error;
       });
@@ -94,7 +99,7 @@ export const initialState = dataMovies => {
 };
 
 export const initialStateAsync = () => {
-  return dispatch => {
+  return (dispatch, getState, api) => {
     const movies = async () => {
       try {
         const listMovies = await api.movies.getMovies();
@@ -111,13 +116,25 @@ export const initialStateAsync = () => {
       }
     };
 
+    dispatch(isLoading(true));
+
     return movies()
       .then(dataMovies => {
+        dispatch(isLoading(false));
         dispatch(initialState(dataMovies));
       })
       .catch(error => {
         throw error;
       });
+  };
+};
+
+export const isLoading = value => {
+  return {
+    type: type.IS_LOAGIND,
+    payload: {
+      value
+    }
   };
 };
 

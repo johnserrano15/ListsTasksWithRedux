@@ -17,6 +17,7 @@ class Movies extends Component {
           <MoviesContainer
             data={this.props.data}
             likesCount={this.props.likesCount}
+            isLoading={this.props.isLoading}
           />
         </MoviesLayout>
       </HandleError>
@@ -28,7 +29,8 @@ function mapStateToProps(state, props) {
   // console.log(state); // toma el nombre del reducer.
   return {
     data: state.dataMovies,
-    likesCount: state.likesCount
+    likesCount: state.likesCount,
+    isLoading: state.isLoading
   };
 }
 

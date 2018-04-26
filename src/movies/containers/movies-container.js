@@ -58,6 +58,9 @@ class Movies extends Component {
     return (
       <MoviesLayout>
         <h3 style={{ textAlign: 'center' }}>List of movies</h3>
+        {this.props.isLoading && (
+          <p>Buscando movies... Buscando movies... Buscando movies...</p>
+        )}
         <ListMovies
           movies={this.props.data}
           likesCount={this.props.likesCount}

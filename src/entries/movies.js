@@ -11,11 +11,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 // https://github.com/gaearon/redux-thunk -> sirve para aplicar acciones async
 import { initialStateAsync } from '../actions/index';
+import api from '../api/index';
 
 const store = createStore(
   reducer,
   {}, // initialState se controla en el reducer
-  composeWithDevTools(applyMiddleware(logger, ReduxThunk))
+  composeWithDevTools(
+    applyMiddleware(logger, ReduxThunk.withExtraArgument(api))
+  )
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
