@@ -21,7 +21,7 @@ const movies = async () => {
   }
 };
 
-async function search(name) {
+/* async function search(name) {
   try {
     const listMovies = await api.movies.getMovies(null, name);
     const dataMovies = [];
@@ -36,14 +36,14 @@ async function search(name) {
   } catch (err) {
     console.log(`Algo salio mal ${err}`);
   }
-}
+} */
 
 const initialState = {
   likesCount: {
     likeCount: 0,
     unlikeCount: 0
   },
-  data: movies()
+  data: []
 };
 
 const likesCount = (state = initialState.likesCount, action) => {
@@ -71,9 +71,9 @@ const likesCount = (state = initialState.likesCount, action) => {
     }
 
     case SEARCH: {
-      if (!action.payload.value.length) {
-        return state;
-      }
+      // if (!action.payload.value.length) {
+      //   return state;
+      // }
       return { likeCount: 0, unlikeCount: 0 };
     }
 
@@ -82,12 +82,25 @@ const likesCount = (state = initialState.likesCount, action) => {
   }
 };
 
+// const dataMoviesInitial = (state = [], action) => {
+//   switch (action.type) {
+//     case 'LOAD_MOVIES': {
+//       return action.payload.dataMovies;
+//     }
+
+//     default:
+//       return state;
+//   }
+// };
+
 const dataMovies = (state = initialState.data, action) => {
   switch (action.type) {
-    case 'ADD': {
-      return [...state, like(undefined, action)];
+    case 'LOAD_MOVIES': {
+      return action.payload.dataMovies;
     }
+
     case LIKE: {
+      console.log(state);
       const newState = state.then(movies => {
         // console.info(state);
         return movies.map(movie => {
@@ -121,11 +134,11 @@ const dataMovies = (state = initialState.data, action) => {
     }
 
     case SEARCH: {
-      if (!action.payload.value.length) {
-        return state;
-      }
-
-      return search(action.payload.value);
+      // if (!action.payload.value.length) {
+      //   return state;
+      // }
+      // console.log(action.payload.dataMovies);
+      return action.payload.dataMovies;
     }
 
     default:

@@ -3,15 +3,23 @@ import React from 'react';
 import { render } from 'react-dom';
 import Movies from '../pages/containers/movies';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 // import reducer from '../reducers/tasks';
 import reducer from '../reducers/index';
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import ReduxThunk from 'redux-thunk';
+// https://github.com/gaearon/redux-thunk -> sirve para aplicar acciones async
+import { initialStateAsync } from '../actions/index';
 
 const store = createStore(
   reducer,
   {}, // initialState se controla en el reducer
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(logger, ReduxThunk))
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+store.dispatch(initialStateAsync());
 
 // console.log(store.getState());
 

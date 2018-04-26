@@ -9,9 +9,7 @@
     "build:local": "webpack --env.NODE_ENV=local",
     "build:prod": "webpack -p --env.NODE_ENV=production"
   },
-  "keywords": [
-    "react"
-  ],
+  "keywords": ["react"],
   "author": "John Serrano",
   "license": "MIT",
   "devDependencies": {
@@ -26,7 +24,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "node-sass": "4.7.2",
-    "redux-devtools-extension": "^2.13.2",
+    "redux-devtools-extension": "2.13.2",
     "sass-loader": "6.0.6",
     "style-loader": "0.19.0",
     "url-loader": "0.6.2",
@@ -38,7 +36,9 @@
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-redux": "^5.0.7",
-    "redux": "4.0.0"
+    "react-redux": "5.0.7",
+    "redux": "4.0.0",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.2.0"
   }
 }

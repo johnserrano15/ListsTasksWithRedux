@@ -3,7 +3,12 @@ import MoviesLayout from '../components/movies-layout';
 import ListMovies from '../components/listMovies';
 import api from '../../api/index';
 import { connect } from 'react-redux';
-import { like, unlike, searchMovies } from '../../actions/index';
+import {
+  like,
+  unlike,
+  searchMovies,
+  searchMoviesAsync
+} from '../../actions/index';
 
 class Movies extends Component {
   constructor(props) {
@@ -13,14 +18,14 @@ class Movies extends Component {
     };
   }
 
-  async componentDidMount() {
+  /* async componentDidMount() {
     const movies = await this.props.data;
     // console.log(movies);
     this.setState({ movies });
   }
 
   async componentWillReceiveProps(nextProps) {
-    // console.info(nextProps);
+    console.info(nextProps);
     const movies = await nextProps.data;
     // console.log(movies);
     if (movies != this.state.movies) {
@@ -28,42 +33,19 @@ class Movies extends Component {
         movies
       });
     }
-  }
+  } */
 
   handlerClickLike = (id, like, unlike) => {
-    // this.props.dispatch({
-    //   type: 'LIKE',
-    //   payload: {
-    //     id,
-    //     like,
-    //     unlike
-    //   }
-    // });
     this.props.like(id, like, unlike);
   };
 
   handlerClickUnlike = (id, like, unlike) => {
-    // this.props.dispatch({
-    //   type: 'UNLIKE',
-    //   payload: {
-    //     id,
-    //     unlike,
-    //     like
-    //   }
-    // });
     this.props.unlike(id, unlike, like);
   };
 
   handlerSubmitSearch = event => {
     event.preventDefault();
-    // console.info(this.input.value);
-    // this.props.dispatch({
-    //   type: 'SEARCH',
-    //   payload: {
-    //     value: this.input.value
-    //   }
-    // });
-    this.props.searchMovies(this.input.value);
+    this.props.searchMoviesAsync(this.input.value);
 
     this.input.value = '';
   };
@@ -77,7 +59,7 @@ class Movies extends Component {
       <MoviesLayout>
         <h3 style={{ textAlign: 'center' }}>List of movies</h3>
         <ListMovies
-          movies={this.state.movies}
+          movies={this.props.data}
           likesCount={this.props.likesCount}
           handlerClickLike={this.handlerClickLike}
           handlerClickUnlike={this.handlerClickUnlike}
@@ -99,7 +81,8 @@ class Movies extends Component {
 const mapDispatchToProps = {
   like,
   unlike,
-  searchMovies
+  searchMovies,
+  searchMoviesAsync
 };
 
 export default connect(null, mapDispatchToProps)(Movies);
