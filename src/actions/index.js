@@ -1,4 +1,4 @@
-import { SEARCH, LIKE, UNLIKE } from './types';
+import * as type from './types';
 import api from '../api/index';
 
 export function addTodo(value) {
@@ -44,16 +44,16 @@ export const submitSearch = (query, items) => {
 };
 
 export const like = (id, like, unlike) => {
-  return { type: LIKE, payload: { id, like, unlike } };
+  return { type: type.LIKE, payload: { id, like, unlike } };
 };
 
 export const unlike = (id, unlike, like) => {
-  return { type: UNLIKE, payload: { id, unlike, like } };
+  return { type: type.UNLIKE, payload: { id, unlike, like } };
 };
 
 export const searchMovies = dataMovies => {
-  console.log(dataMovies);
-  return { type: SEARCH, payload: { dataMovies } };
+  // console.log(dataMovies);
+  return { type: type.SEARCH, payload: { dataMovies } };
 };
 
 // ReduxThunk
@@ -80,12 +80,17 @@ export const searchMoviesAsync = value => {
       return null;
     }
 
-    return search(value).then(data => dispatch(searchMovies(data)));
+    return search(value)
+      .then(data => dispatch(searchMovies(data)))
+      .catch(error => {
+        throw error;
+      });
   };
 };
 
+// http://www.thegreatcodeadventure.com/react-redux-tutorial-part-iii-async-redux/
 export const initialState = dataMovies => {
-  return { type: 'LOAD_MOVIES', payload: { dataMovies } };
+  return { type: type.LOAD_MOVIES, payload: { dataMovies } };
 };
 
 export const initialStateAsync = () => {

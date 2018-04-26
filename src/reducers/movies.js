@@ -1,5 +1,5 @@
 import api from '../api/index';
-import { SEARCH, LIKE, UNLIKE } from '../actions/types';
+import * as type from '../actions/types';
 
 const initialState = {
   likesCount: {
@@ -11,7 +11,7 @@ const initialState = {
 
 const likesCount = (state = initialState.likesCount, action) => {
   switch (action.type) {
-    case LIKE: {
+    case type.LIKE: {
       const likes = {
         likeCount: !action.payload.like
           ? state.likeCount + 1
@@ -23,7 +23,7 @@ const likesCount = (state = initialState.likesCount, action) => {
       return likes;
     }
 
-    case UNLIKE: {
+    case type.UNLIKE: {
       const unlikes = {
         unlikeCount: !action.payload.unlike
           ? state.unlikeCount + 1
@@ -33,10 +33,7 @@ const likesCount = (state = initialState.likesCount, action) => {
       return unlikes;
     }
 
-    case SEARCH: {
-      // if (!action.payload.value.length) {
-      //   return state;
-      // }
+    case type.SEARCH: {
       return { likeCount: 0, unlikeCount: 0 };
     }
 
@@ -47,11 +44,11 @@ const likesCount = (state = initialState.likesCount, action) => {
 
 const dataMovies = (state = initialState.data, action) => {
   switch (action.type) {
-    case 'LOAD_MOVIES': {
+    case type.LOAD_MOVIES: {
       return action.payload.dataMovies;
     }
 
-    case LIKE: {
+    case type.LIKE: {
       // console.log(state);
       const newState = state.map(movie => {
         if (movie.imdbID !== action.payload.id) {
@@ -65,7 +62,7 @@ const dataMovies = (state = initialState.data, action) => {
       });
       return newState;
     }
-    case UNLIKE: {
+    case type.UNLIKE: {
       const newState = state.map(movie => {
         if (movie.imdbID !== action.payload.id) {
           return movie;
@@ -80,7 +77,7 @@ const dataMovies = (state = initialState.data, action) => {
       return newState;
     }
 
-    case SEARCH: {
+    case type.SEARCH: {
       return action.payload.dataMovies;
     }
 
