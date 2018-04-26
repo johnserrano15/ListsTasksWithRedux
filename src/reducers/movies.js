@@ -1,43 +1,6 @@
 import api from '../api/index';
 import { SEARCH, LIKE, UNLIKE } from '../actions/types';
 
-const movies = async () => {
-  try {
-    const listMovies = await api.movies.getMovies();
-    const dataMovies = [];
-    // console.log(listMovies);
-    listMovies.Search.map((movie, index) => {
-      dataMovies[index] = {
-        ...movie,
-        like: false,
-        unlike: false
-      };
-    });
-
-    // console.log(dataMovies);
-    return dataMovies;
-  } catch (err) {
-    console.log(`Algo salio mal ${err}`);
-  }
-};
-
-/* async function search(name) {
-  try {
-    const listMovies = await api.movies.getMovies(null, name);
-    const dataMovies = [];
-    // console.log(listMovies);
-    if (listMovies.Response !== 'False') {
-      listMovies.Search.map((movie, index) => {
-        dataMovies[index] = { ...movie, like: false, unlike: false };
-      });
-    }
-    // console.log(dataMovies);
-    return dataMovies;
-  } catch (err) {
-    console.log(`Algo salio mal ${err}`);
-  }
-} */
-
 const initialState = {
   likesCount: {
     likeCount: 0,
@@ -82,17 +45,6 @@ const likesCount = (state = initialState.likesCount, action) => {
   }
 };
 
-// const dataMoviesInitial = (state = [], action) => {
-//   switch (action.type) {
-//     case 'LOAD_MOVIES': {
-//       return action.payload.dataMovies;
-//     }
-
-//     default:
-//       return state;
-//   }
-// };
-
 const dataMovies = (state = initialState.data, action) => {
   switch (action.type) {
     case 'LOAD_MOVIES': {
@@ -100,44 +52,35 @@ const dataMovies = (state = initialState.data, action) => {
     }
 
     case LIKE: {
-      console.log(state);
-      const newState = state.then(movies => {
-        // console.info(state);
-        return movies.map(movie => {
-          if (movie.imdbID !== action.payload.id) {
-            return movie;
-          }
-          return {
-            ...movie,
-            like: !movie.like,
-            unlike: !movie.like ? false : movie.unlike
-          };
-        });
+      // console.log(state);
+      const newState = state.map(movie => {
+        if (movie.imdbID !== action.payload.id) {
+          return movie;
+        }
+        return {
+          ...movie,
+          like: !movie.like,
+          unlike: !movie.like ? false : movie.unlike
+        };
       });
       return newState;
     }
     case UNLIKE: {
-      const newState = state.then(movies => {
-        return movies.map(movie => {
-          if (movie.imdbID !== action.payload.id) {
-            return movie;
-          }
-          // console.log(movie);
-          return {
-            ...movie,
-            like: !movie.unlike ? false : movie.like,
-            unlike: !movie.unlike
-          };
-        });
+      const newState = state.map(movie => {
+        if (movie.imdbID !== action.payload.id) {
+          return movie;
+        }
+        // console.log(movie);
+        return {
+          ...movie,
+          like: !movie.unlike ? false : movie.like,
+          unlike: !movie.unlike
+        };
       });
       return newState;
     }
 
     case SEARCH: {
-      // if (!action.payload.value.length) {
-      //   return state;
-      // }
-      // console.log(action.payload.dataMovies);
       return action.payload.dataMovies;
     }
 
