@@ -67,9 +67,6 @@ class PostPage extends Component {
       <HandleError>
         <PostLayout>
           {this.state.posts.map((post, index) => {
-            {
-              /* console.log(post) */
-            }
             return <Post key={post.id} {...post} />;
           })}
           {this.state.loading && <h2>loading posts...</h2>}

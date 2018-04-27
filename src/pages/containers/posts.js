@@ -26,6 +26,7 @@ class Posts extends Component {
 
   async initialFecth() {
     const posts = await api.posts.getList(this.state.page);
+    // console.info(posts);
     // con esto enviamos los posts el numero de paginas y el loading
     this.setState({
       posts,

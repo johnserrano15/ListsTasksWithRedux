@@ -1,6 +1,45 @@
 import { normalize, schema } from 'normalizr';
 
-/* const data = {
+/*
+//No Normalizados
+
+  {
+    "categories": [
+      {
+        "title": "las mas sonadas",
+        "id":"1",
+        "playlist":[
+          {
+            "title":"Despacito",
+            "id":"123"
+          }
+        ]
+      }
+    ]
+  }
+
+
+  //Normalizados
+
+  {
+    "categories":{
+      "1":{
+        "title":"Las mas sonadas",
+        "playlist":[
+          "123"
+        ]
+      }
+    },
+    "media":{
+      "123":{
+        "title":"Despacito"
+      }
+    }
+  } 
+
+*/
+
+const data = {
   id: '123',
   author: {
     id: '1',
@@ -16,7 +55,20 @@ import { normalize, schema } from 'normalizr';
       }
     }
   ]
-}; */
+};
+
+const usuario = new schema.Entity('usuario');
+
+const comentario = new schema.Entity('comentarios', {
+  commenter: usuario
+});
+
+const articulo = new schema.Entity('articulo', {
+  author: usuario,
+  comments: [comentario]
+});
+
+// const normalizedData = normalize(data, articulo);
 
 // Define a users schema
 // const user = new schema.Entity('users');
@@ -25,6 +77,7 @@ import { normalize, schema } from 'normalizr';
 const comment = new schema.Entity('comments', {
   commenter: user
 });
+// En el segundo parametro de mi shema como hijo de ese schema
 
 // Define your article
 const article = new schema.Entity('articles', {
@@ -165,11 +218,15 @@ const normalizedData = normalize(data, userListSchema);
 
 */
 
-const data = [{ id: 1, type: 'admin' }, { id: 2, type: 'user' }];
+const dataAdmin = [
+  { id: 1, type: 'admin' },
+  { id: 2, type: 'user' },
+  { id: 3, type: 'admin' }
+];
 
 const userSchema = new schema.Entity('users');
 const adminSchema = new schema.Entity('admins');
-const myArray = new schema.Array(
+const myArray = new schema.Values(
   {
     admins: adminSchema,
     users: userSchema
@@ -177,6 +234,6 @@ const myArray = new schema.Array(
   (value, parent, key) => `${value.type}s`
 );
 
-const normalizedData = normalize(data, myArray);
+const normalizedData = normalize(dataAdmin, myArray);
 
 export default normalizedData;
