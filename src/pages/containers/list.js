@@ -26,9 +26,14 @@ class List extends Component {
 }
 
 function mapStateToProps(state, props) {
-  // console.log(state); // toma el nombre del reducer.
+  console.info(state);
+  // console.log(state.get('list')); // toma el nombre del reducer.
+  // console.log(state.get('listFilter').get('filter')); // toma el nombre del reducer.
   return {
-    data: getVisibleTodos(state.list, state.listFilter)
+    data: getVisibleTodos(
+      state.get('list'),
+      state.get('listFilter').get('filter')
+    )
   };
 }
 

@@ -43,7 +43,8 @@ const mapDispatchToProps = {
 
 function mapStateToProps(state, props) {
   // console.log(state);
-  return { visibilityFilter: state.listFilter };
+  // return { visibilityFilter: state.listFilter };
+  return { visibilityFilter: state.get('listFilter').get('filter') };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterLink);

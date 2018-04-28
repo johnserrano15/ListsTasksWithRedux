@@ -6,9 +6,10 @@ import listFilter from './listFilter';
 import { dataMovies, likesCount } from './movies';
 import isLoading from './loading';
 
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 
-const rootReducer = combineReducers({
+/* const rootReducer = combineReducers({
   post,
   tasks,
   search,
@@ -17,6 +18,10 @@ const rootReducer = combineReducers({
   dataMovies,
   likesCount,
   isLoading
+}); */
+const rootReducer = combineReducers({
+  list,
+  listFilter
 });
 
 export default rootReducer;

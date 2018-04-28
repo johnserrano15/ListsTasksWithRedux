@@ -6,10 +6,11 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 // import reducer from '../reducers/tasks';
 import reducer from '../reducers/index';
+import { Map as map } from 'immutable';
 
 const store = createStore(
   reducer,
-  {}, // initialState se controla en el reducer
+  map(), // initialState se controla en el reducer
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
