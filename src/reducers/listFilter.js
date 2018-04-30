@@ -6,10 +6,11 @@ const initialState = fromJS({
 // Un reducer para filtrar
 const visibilityFilter = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      // console.log(action.filter)
-      // Aca llega el tipo de filtro Ej: SHOW_ACTIVE
+    case 'SET_VISIBILITY_FILTER': {
+      // console.log(state.set('filter', action.payload.filter));
+      // console.log(state.set('filter', action.payload.filter).toJS());
       return state.set('filter', action.payload.filter);
+    }
     default:
       return state;
   }
